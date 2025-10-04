@@ -1,0 +1,2 @@
+gcloud services disable dataflow.googleapis.com --project qwiklabs-gcp-00-ce7fb724db45 --force
+gcloud services enable dataflow.googleapis.com --project qwiklabs-gcp-00-ce7fb724db45

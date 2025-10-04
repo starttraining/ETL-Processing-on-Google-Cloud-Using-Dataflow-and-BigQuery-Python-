@@ -1,0 +1,55 @@
+In this task, you review the data transformation pipeline to learn how it works. You then run the pipeline to process the Cloud Storage files and output the result to BigQuery.
+
+The data transformation pipeline also ingests data from Cloud Storage into the BigQuery table using a TextIO source and a BigQueryIO destination, but with additional data transformations. Specifically, the pipeline:
+
+Ingests the files from Cloud Storage.
+Converts the lines read to dictionary objects.
+Transforms the data which contains the year to a format BigQuery understands as a date.
+Outputs the rows to BigQuery.
+Review the Python code for the data transformation pipeline
+In this section, you prompt Gemini Code Assist for additional information on the data transformation pipeline to assist the new team member further.
+
+In the Cloud Shell menu bar, click Open Editor.
+
+In the Cloud Shell Editor, still in the same directory, navigate to data_transformation.py file. As before, notice the Gemini Code Assist: Smart Actions icon in the upper-right corner of the editor.
+
+Click the Gemini Code Assist: Smart Actions Gemini Code Assist: Smart Actions icon and select Explain this.
+
+Gemini Code Assist opens a chat pane with the prefilled prompt of Explain this. In the inline text box of the Code Assist chat, replace the prefilled prompt with the following, and click Send:
+
+You are an expert Data Engineer at Cymbal AI. A new team member is unfamiliar with this pipeline code. Explain the purpose and functionality of the data transformation pipeline defined in the data_transformation.py. Your explanation should include:
+
+1. A high-level summary of what the script does, noting its differences from a simple ingestion pipeline.
+2. A breakdown of the key components, specifically the DataTransformation class and the run function.
+3. A detailed explanation of how the script uses the Apache Beam pipeline to read from a file, transform the data, and write it to a BigQuery table.
+4. Describe how the script handles the BigQuery schema by reading it from a JSON file.
+5. Explain the data transformation logic within the parse_method, particularly how it converts the year to a DATE type.
+6. The role of command-line arguments and how they are used.
+
+For the suggested improvements, don't update this file.
+Copied!
+The explanation for the code in the data_transformation.py file appears in the Gemini Code Assist chat.
+
+Run the data transformation pipeline in the cloud
+Enter the following command in the Cloud Shell Terminal to run the data transformation pipeline:
+python dataflow_python_examples/data_transformation.py \
+  --project=qwiklabs-gcp-00-ce7fb724db45 \
+  --region=europe-west1 \
+  --runner=DataflowRunner \
+  --machine_type=e2-standard-2 \
+  --staging_location=gs://qwiklabs-gcp-00-ce7fb724db45/test \
+  --temp_location gs://qwiklabs-gcp-00-ce7fb724db45/test \
+  --input gs://qwiklabs-gcp-00-ce7fb724db45/data_files/head_usa_names.csv \
+  --save_main_session
+Copied!
+In the Google Cloud console title bar, type Dataflow in the Search field and then click Dataflow from the search results.
+
+Click the name of this job to view the status of your job.
+
+This Dataflow pipeline takes approximately five minutes to start, complete the work, and then shutdown.
+
+When your Job Status is Succeeded in the Dataflow Job Status screen, navigate to BigQuery to check to see that your data has been populated.
+You should see the usa_names_transformed table under the lake dataset.
+
+Click the table and navigate to the Preview tab to see examples of the usa_names_transformed data.
+Note: If you don't see the usa_names_transformed table, try refreshing the page or view the tables using the classic BigQuery UI.

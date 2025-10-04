@@ -1,0 +1,47 @@
+You now build a data enrichment pipeline that accomplishes the following:
+
+Ingest the files from Cloud Storage.
+Filter out the header row in the files.
+Convert the lines read to dictionary objects.
+Output the rows to BigQuery.
+Review and edit the Python code for the data enrichment pipeline
+In this section, you leverage the AI-powered features of Gemini Code Assist to review and edit the Python code for the data enrichment pipeline.
+
+In the Cloud Shell menu bar, click Open Editor.
+
+In the Cloud Shell Editor, still in the same directory, navigate to data_enrichment.py. As before, notice the Gemini Code Assist: Smart Actions icon in the upper-right corner of the editor.
+
+Click the Gemini Code Assist: Smart Actions Gemini Code Assist icon on the toolbar.
+
+To update the code at Line 83, paste the following prompt into the Gemini Code Assist inline text field that opens from the toolbar.
+
+In the data_enrichment.py file, update line 83 by replacing x.decode('utf8') with x.
+Copied!
+To prompt Gemini Code Assist to modify the code accordingly, press ENTER.
+
+When prompted in the Gemini Diff view, click Accept.
+
+The updated line 83 in the data_enrichment.py file now looks something like this:
+
+values = [x for x in csv_row]
+When you have finished editing this line, remember to Save this updated file by selecting the File option in the Code Editor and clicking Save.
+Run the data enrichment pipeline
+Enter the following command in the Cloud Shell Terminal to execute the data enrichment pipeline:
+python dataflow_python_examples/data_enrichment.py \
+  --project=qwiklabs-gcp-00-ce7fb724db45 \
+  --region=europe-west1 \
+  --runner=DataflowRunner \
+  --machine_type=e2-standard-2 \
+  --staging_location=gs://qwiklabs-gcp-00-ce7fb724db45/test \
+  --temp_location gs://qwiklabs-gcp-00-ce7fb724db45/test \
+  --input gs://qwiklabs-gcp-00-ce7fb724db45/data_files/head_usa_names.csv \
+  --save_main_session
+Copied!
+In the Dataflow page, click your job to view its Job status.
+This Dataflow pipeline takes approximately five minutes to start, complete the work, and then shut down.
+
+Once your Job Status is Succeed in the Dataflow Job Status screen, in the console click Navigation menu > BigQuery to check to see that your data has been populated.
+You should see the usa_names_enriched table under the lake dataset.
+
+Click the table and navigate to the Preview tab to see examples of the usa_names_enriched data.
+Note: If you don't see the usa_names_enriched table, try refreshing the page or view the tables using the classic BigQuery UI.

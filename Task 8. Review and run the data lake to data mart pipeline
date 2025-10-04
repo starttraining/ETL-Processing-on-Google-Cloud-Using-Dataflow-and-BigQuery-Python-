@@ -1,0 +1,37 @@
+Now you build a Dataflow pipeline that reads data from two BigQuery data sources and then joins the data sources. Specifically, you:
+
+Ingest files from two BigQuery sources.
+Join the two data sources.
+Filter out the header row in the files.
+Convert the lines read to dictionary objects.
+Output the rows to BigQuery.
+Run the data ingestion pipeline to perform a data join and write the resulting table to BigQuery
+You first review the data_lake_to_mart.py code to gain understanding of what it does. You then run the pipeline in the cloud.
+
+In the Code Editor, open data_lake_to_mart.py file.
+Read the comments in the file, which explain what the code is doing. This code joins two tables and write the results to new table in BigQuery.
+
+Note: To learn more about the data lake to data mart pipeline, you can again ask Gemini Code Assist to explain the code, similar to how you used its AI-powered features in Tasks 5 and 6.
+Run the following code block to execute the pipeline:
+python dataflow_python_examples/data_lake_to_mart.py \
+  --worker_disk_type="compute.googleapis.com/projects//zones//diskTypes/pd-ssd" \
+  --max_num_workers=4 \
+  --project=qwiklabs-gcp-00-ce7fb724db45 \
+  --runner=DataflowRunner \
+  --machine_type=e2-standard-2 \
+  --staging_location=gs://qwiklabs-gcp-00-ce7fb724db45/test \
+  --temp_location gs://qwiklabs-gcp-00-ce7fb724db45/test \
+  --save_main_session \
+  --region=europe-west1
+Copied!
+In the Google Cloud console title bar, type Dataflow in the Search field, and then click Dataflow from the search results.
+
+Click this new job to view the status.
+
+This Dataflow pipeline takes approximately five minutes to start, complete the work, and then shutdown.
+
+Once your Job Status is Succeeded in the Dataflow Job Status screen, click Navigation menu > BigQuery to check that your data has been populated.
+You should see the orders_denormalized_sideinput table under the lake dataset.
+
+Click the table and navigate to the Preview section to see examples of orders_denormalized_sideinput data.
+Note: If you don't see the orders_denormalized_sideinput table, try refreshing the page or view the tables using the classic BigQuery UI.

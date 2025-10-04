@@ -1,0 +1,28 @@
+gcloud services enable cloudaicompanion.googleapis.com
+
+You are an expert Data Engineer at Cymbal AI. A new team member is unfamiliar with this pipeline code. Explain the purpose and functionality of the data ingestion pipeline defined in the data_ingestion.py. Your explanation should include:
+
+1. A high-level summary of what the script does.
+2. A breakdown of the key components, such as the DataIngestion class and the run function.
+3. An explanation of how the script uses the Apache Beam pipeline to read, process, and write data.
+4. The role of command-line arguments and how they are used.
+5. A description of the input data format and the output BigQuery table schema.
+
+For the suggested improvements, don't update this file.
+
+cd ~
+docker run -it -e PROJECT=qwiklabs-gcp-00-ce7fb724db45 -v $(pwd)/dataflow-python-examples:/dataflow python:3.8 /bin/bash
+
+pip install apache-beam[gcp]==2.59.0
+
+cd dataflow/
+
+python dataflow_python_examples/data_ingestion.py \
+  --project=qwiklabs-gcp-00-ce7fb724db45 \
+  --region=europe-west1 \
+  --runner=DataflowRunner \
+  --machine_type=e2-standard-2 \
+  --staging_location=gs://qwiklabs-gcp-00-ce7fb724db45/test \
+  --temp_location gs://qwiklabs-gcp-00-ce7fb724db45/test \
+  --input gs://qwiklabs-gcp-00-ce7fb724db45/data_files/head_usa_names.csv \
+  --save_main_session

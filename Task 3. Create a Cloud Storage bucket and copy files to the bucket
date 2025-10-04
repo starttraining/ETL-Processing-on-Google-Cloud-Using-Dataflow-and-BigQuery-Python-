@@ -1,0 +1,4 @@
+gcloud storage buckets create gs://qwiklabs-gcp-00-ce7fb724db45 --location=europe-west1
+
+gcloud storage cp gs://spls/gsp290/data_files/usa_names.csv gs://qwiklabs-gcp-00-ce7fb724db45/data_files/
+gcloud storage cp gs://spls/gsp290/data_files/head_usa_names.csv gs://qwiklabs-gcp-00-ce7fb724db45/data_files/
