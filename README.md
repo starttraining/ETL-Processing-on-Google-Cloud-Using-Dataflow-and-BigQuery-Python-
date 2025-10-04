@@ -7,3 +7,5 @@
 - Task 6. Review and run the data transformation pipeline
 - Task 7. Review and run the data enrichment pipeline
 - Task 8. Review and run the data lake to data mart pipeline
+- File (https://github.com/starttraining/ETL-Processing-on-Google-Cloud-Using-Dataflow-and-BigQuery-Python-/blob/main/dataflow_examples.tar.gz)
+- Video (https://youtu.be/0586023O3SI)
